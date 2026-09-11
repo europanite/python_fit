@@ -29,19 +29,6 @@ jobs:
       - name: Install deps
         working-directory: frontend/app
         run: npm ci
-      - name: Generate sitemap
-        run: |
-          LASTMOD="$(git log -1 --format=%cs)"
-          cat > frontend/app/public/sitemap.xml <<EOF
-          <?xml version="1.0" encoding="UTF-8"?>
-          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-            <url>
-              <loc>https://europanite.github.io/client_side_python/</loc>
-              <lastmod>${LASTMOD}</lastmod>
-            </url>
-          </urlset>
-          EOF
-          cat frontend/app/public/sitemap.xml
       - name: Build (expo export -p web)
         working-directory: frontend/app
         run: npx expo export -p web --output-dir dist
